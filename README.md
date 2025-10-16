@@ -8,8 +8,9 @@ Una página web moderna y responsive para la empresa de ingeniería ambiental Ec
 - **Tema Ecológico**: Colores verdes y naturales que reflejan la identidad ambiental
 - **Navegación Suave**: Scroll suave entre secciones
 - **Animaciones**: Efectos visuales atractivos y profesionales
-- **Formulario de Contacto**: Sistema de contacto funcional
-- **Código Configurable**: Estructura clara y comentada para fácil modificación
+- **Formulario de Contacto**: Sistema de contacto funcional con EmailJS
+- **Código Organizado**: Estructura clara y comentada para fácil modificación
+- **Formulario de Email**: Envío de correos electrónicos directamente desde el sitio web
 
 ## 🏗️ Estructura del Proyecto
 
@@ -18,6 +19,7 @@ ecologica-web/
 ├── index.html          # Estructura principal de la página
 ├── styles.css          # Estilos CSS con tema ecológico
 ├── script.js           # Funcionalidades JavaScript
+├── favicon.png         # Icono del sitio web
 └── README.md           # Documentación del proyecto
 ```
 
@@ -66,9 +68,10 @@ ecologica-web/
 
 ### 8. **Contacto** (`#contacto`)
 
-- Formulario de contacto funcional
+- Formulario de contacto funcional con EmailJS
 - Información de contacto
 - Validación de campos
+- Envío de correos electrónicos automático
 
 ### 9. **Footer** (`#footer`)
 
@@ -97,9 +100,10 @@ ecologica-web/
 
 ### Funcionalidades (en `script.js`)
 
-- **Formulario de contacto**: Líneas 60-90 - Integrar con servicio de email
-- **Animaciones**: Líneas 150-200 - Personalizar efectos
-- **Navegación**: Líneas 20-60 - Modificar comportamiento
+- **Formulario de contacto**: Líneas 135-215 - Configurar EmailJS
+- **Animaciones**: Líneas 307-366 - Personalizar efectos
+- **Navegación**: Líneas 12-73 - Modificar comportamiento
+- **Validación de email**: Líneas 237-242 - Personalizar validación
 
 ## 📱 Responsive Design
 
@@ -118,17 +122,40 @@ La página está optimizada para:
 
 ## 🔧 Tecnologías Utilizadas
 
-- **HTML5**: Estructura semántica
-- **CSS3**: Estilos modernos con variables CSS
-- **JavaScript**: Funcionalidades interactivas
-- **Font Awesome**: Iconografía
+- **HTML5**: Estructura semántica con comentarios organizados
+- **CSS3**: Estilos modernos con variables CSS y diseño responsive
+- **JavaScript**: Funcionalidades interactivas y formulario de contacto
+- **EmailJS**: Servicio de envío de correos electrónicos
+- **Font Awesome**: Iconografía profesional
 - **Google Fonts**: Tipografía Poppins
+
+## 🗂️ Organización del Código
+
+### **HTML (`index.html`)**
+
+- Comentarios detallados para cada sección
+- Estructura semántica clara
+- Formulario de contacto funcional
+
+### **CSS (`styles.css`)**
+
+- Variables CSS organizadas por categorías
+- Comentarios por secciones (Header, Hero, Servicios, etc.)
+- Media queries bien documentadas
+- Sistema de botones y utilidades
+
+### **JavaScript (`script.js`)**
+
+- Funciones organizadas por funcionalidad
+- Comentarios descriptivos para cada función
+- Manejo del formulario de contacto
+- Animaciones y efectos visuales
 
 ## 📞 Información de Contacto
 
-- **Email**: ecologicaintegrada@gmail.com
+- **Email**: ecologicaintegradasas@gmail.com
 - **Ubicación**: Montería, Córdoba - Colombia
-- **WhatsApp**: +57 [número por actualizar]
+- **Instagram**: @ecologicaintegrada
 
 ## 🌱 Sobre EcoLógica Integrada S.A.S.
 

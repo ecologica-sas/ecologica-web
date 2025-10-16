@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ===== NAVEGACIÓN Y MENÚ MÓVIL =====
+// ===== FUNCIÓN: Inicializar navegación y menú móvil =====
 function initializeNavigation() {
   const navToggle = document.getElementById("nav-toggle");
   const navMenu = document.getElementById("nav-menu");
@@ -72,6 +73,7 @@ function initializeNavigation() {
 }
 
 // ===== EFECTOS DE SCROLL =====
+// ===== FUNCIÓN: Inicializar efectos de scroll y animaciones =====
 function initializeScrollEffects() {
   // Intersection Observer para animaciones al hacer scroll
   const observerOptions = {
@@ -131,27 +133,116 @@ function initializeScrollEffects() {
 }
 
 // ===== MANEJO DE FORMULARIO DE CONTACTO =====
+// ===== FUNCIÓN: Inicializar formulario de contacto con EmailJS =====
 function initializeFormHandling() {
-  const whatsappButton = document.querySelector(".btn--whatsapp");
-  if (whatsappButton) {
-    whatsappButton.addEventListener("click", function () {
-      const message = encodeURIComponent(
-        "Hola! me interesa contactar con EcoLógica Integrada S.A.S."
-      );
-      const phoneNumber = "573234822535"; // <-- tu número con el código de país
-      const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
-      window.open(whatsappURL, "_blank");
+  // Inicializar EmailJS
+  (function () {
+    emailjs.init("10Rvc4ax0d7BS4UZt"); // Reemplazar con tu clave pública de EmailJS
+  })();
+
+  const emailForm = document.getElementById("email-form");
+  const formStatus = document.getElementById("form-status");
+
+  if (emailForm) {
+    emailForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Obtener datos del formulario
+      const formData = new FormData(emailForm);
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const subject = formData.get("subject");
+      const message = formData.get("message");
+
+      // Validar campos
+      if (!name || !email || !subject || !message) {
+        showFormStatus(
+          "Por favor, completa todos los campos requeridos.",
+          "error"
+        );
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        showFormStatus(
+          "Por favor, ingresa un correo electrónico válido.",
+          "error"
+        );
+        return;
+      }
+
+      // Mostrar estado de carga
+      showFormStatus("Enviando mensaje...", "loading");
+
+      // Deshabilitar botón de envío
+      const submitBtn = emailForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+      // Parámetros para EmailJS
+      const templateParams = {
+        name: name,
+        email: email,
+        subject: subject,
+        message: message,
+        to_email: "lauralaura5432098@gmail.com",
+      };
+
+      // Enviar email usando EmailJS
+      emailjs
+        .send("service_ygile3d", "template_bgbg3ir", templateParams)
+        .then(function (response) {
+          console.log("Email enviado exitosamente:", response);
+          showFormStatus(
+            "¡Mensaje enviado exitosamente! Te contactaremos pronto.",
+            "success"
+          );
+          emailForm.reset();
+        })
+        .catch(function (error) {
+          console.error("Error al enviar email:", error);
+          showFormStatus(
+            "Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.",
+            "error"
+          );
+        })
+        .finally(function () {
+          // Rehabilitar botón de envío
+          submitBtn.disabled = false;
+          submitBtn.innerHTML =
+            '<i class="fas fa-paper-plane"></i> Enviar mensaje';
+        });
     });
   }
 }
 
+// Función para mostrar estado del formulario
+function showFormStatus(message, type) {
+  const formStatus = document.getElementById("form-status");
+  if (formStatus) {
+    formStatus.textContent = message;
+    formStatus.className = `form__status form__status--${type}`;
+
+    // Limpiar mensaje después de 5 segundos para mensajes de éxito
+    if (type === "success") {
+      setTimeout(() => {
+        formStatus.textContent = "";
+        formStatus.className = "form__status";
+      }, 5000);
+    }
+  }
+}
+
 // ===== FUNCIÓN DE VALIDACIÓN DE EMAIL =====
+// ===== FUNCIÓN: Validar formato de correo electrónico =====
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
 // ===== SISTEMA DE NOTIFICACIONES =====
+// ===== FUNCIÓN: Mostrar notificaciones al usuario =====
 function showNotification(message, type = "info") {
   // Crear elemento de notificación
   const notification = document.createElement("div");
@@ -218,6 +309,7 @@ function closeNotification(closeBtn) {
 }
 
 // ===== ANIMACIONES Y EFECTOS VISUALES =====
+// ===== FUNCIÓN: Inicializar animaciones y efectos visuales =====
 function initializeAnimations() {
   // Efecto parallax suave para el hero (deshabilitado para evitar superposiciones)
   // window.addEventListener("scroll", function () {
@@ -243,6 +335,7 @@ function initializeAnimations() {
 }
 
 // ===== ANIMACIÓN DE TYPING =====
+// ===== FUNCIÓN: Efecto de escritura para títulos =====
 function animateTyping(element, text) {
   element.textContent = "";
   let i = 0;
@@ -280,8 +373,7 @@ function animateCounter(element) {
 }
 
 // ===== FUNCIONES UTILITARIAS =====
-
-// Función para scroll suave a cualquier elemento
+// ===== FUNCIÓN: Scroll suave a cualquier elemento =====
 function scrollToElement(elementId) {
   const element = document.getElementById(elementId);
   if (element) {
@@ -313,8 +405,7 @@ function loadSavedTheme() {
 }
 
 // ===== OPTIMIZACIONES DE RENDIMIENTO =====
-
-// Throttle para eventos de scroll
+// ===== FUNCIÓN: Throttle para eventos de scroll =====
 function throttle(func, limit) {
   let inThrottle;
   return function () {
@@ -343,8 +434,7 @@ window.addEventListener("error", function (e) {
 });
 
 // ===== FUNCIONES DE ACCESIBILIDAD =====
-
-// Navegación con teclado
+// ===== FUNCIÓN: Navegación con teclado =====
 document.addEventListener("keydown", function (e) {
   // ESC para cerrar menús
   if (e.key === "Escape") {
@@ -360,11 +450,10 @@ document.addEventListener("keydown", function (e) {
 });
 
 // ===== INICIALIZACIÓN ADICIONAL =====
-
-// Cargar tema al inicializar
+// ===== FUNCIÓN: Cargar tema al inicializar =====
 loadSavedTheme();
 
-// Lazy loading para imágenes (si se agregan en el futuro)
+// ===== FUNCIÓN: Lazy loading para imágenes =====
 function initializeLazyLoading() {
   const images = document.querySelectorAll("img[data-src]");
   const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -385,13 +474,15 @@ function initializeLazyLoading() {
 initializeLazyLoading();
 
 // ===== CONSOLA DE BIENVENIDA =====
+// ===== MENSAJE: Saludo en consola =====
 console.log(`
 🌿 ¡Bienvenido a EcoLógica Integrada S.A.S.!
 💚 Desarrollado con amor por el medio ambiente
 🌱 Pensamos en verde, actuamos con lógica
 `);
 
-// ===== EXPORTAR FUNCIONES PARA USO GLOBAL (si es necesario) =====
+// ===== EXPORTAR FUNCIONES PARA USO GLOBAL =====
+// ===== OBJETO: Funciones disponibles globalmente =====
 window.EcoLogica = {
   scrollToElement,
   showNotification,
