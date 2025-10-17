@@ -347,6 +347,44 @@ body {
   margin-right: auto;
 }
 
+/* ===== LOGO DE LA EMPRESA ===== */
+.about-us__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0 3rem 0;
+  position: relative;
+}
+
+.about-us__logo::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 95%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  z-index: 1;
+}
+
+.company-logo {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  transition: var(--transition);
+  position: relative;
+  z-index: 2;
+}
+
+.company-logo:hover {
+  transform: scale(1.05);
+}
+
 .experience__list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1036,6 +1074,16 @@ body {
   .contact__form {
     padding: 2rem;
   }
+
+  /* ===== LOGO RESPONSIVO ===== */
+  .company-logo {
+    max-width: 350px;
+  }
+  
+  .about-us__logo::before {
+    width: 110%;
+    height: 110%;
+  }
 }
 
 /* ===== MÓVILES PEQUEÑOS (480px y menos) ===== */
@@ -1087,6 +1135,17 @@ body {
 
   .contact__form {
     padding: 1.5rem;
+  }
+
+  /* ===== LOGO EN MÓVILES PEQUEÑOS ===== */
+  .company-logo {
+    max-width: 250px;
+  }
+  
+  .about-us__logo::before {
+    width: 105%;
+    height: 105%;
+    border-radius: 15px;
   }
 }
 
