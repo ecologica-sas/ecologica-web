@@ -73,6 +73,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Evitar desbordes horizontales */
+html,
+body {
+  overflow-x: hidden;
+}
+
 /* ===== CONTENEDOR PRINCIPAL ===== */
 .container {
   max-width: 1200px;
